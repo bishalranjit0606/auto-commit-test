@@ -7,6 +7,10 @@ from datetime import datetime
 repo_path = os.getcwd()
 os.chdir(repo_path)
 
+# ✅ Set Git author identity for all commits
+subprocess.run(["git", "config", "user.name", "github-actions[bot]"], check=True)
+subprocess.run(["git", "config", "user.email", "actions@github.com"], check=True)
+
 # Decide 1–5 commits per run
 num_commits = random.randint(1, 5)
 print(f"🌞 Planning {num_commits} commits for this run")
