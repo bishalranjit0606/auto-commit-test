@@ -5,7 +5,9 @@ import time
 from datetime import datetime
 
 # Path to your repo
-repo_path = "/Users/bishalranjitkar/desktop/Bishal_ranjit/auto-commit-test"
+import os
+
+repo_path = os.getcwd()  # Automatically use current working directory
 os.chdir(repo_path)
 
 # Choose random number of commits between 20–30
