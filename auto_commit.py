@@ -1,37 +1,28 @@
 import os
 import random
 import subprocess
-import time
 from datetime import datetime
 
-# Path to your repo
-import os
-
-repo_path = os.getcwd()  # Automatically use current working directory
+# Work in the current repository
+repo_path = os.getcwd()
 os.chdir(repo_path)
 
-# Choose random number of commits between 20–30
-num_commits = random.randint(20, 30)
-print(f"Making {num_commits} commits today...")
+# Decide 1–5 commits per run
+num_commits = random.randint(1, 5)
+print(f"🌞 Planning {num_commits} commits for this run")
 
-for i in range(num_commits):
+for i in range(1, num_commits + 1):
+    # Write a new line to file
     filename = "auto_file.txt"
-
-    # Append a new line each time
     with open(filename, "a") as f:
-        f.write(f"Commit {i+1} at {datetime.now()}\n")
+        f.write(f"Commit {i} at {datetime.now()}\n")
 
     # Git add + commit
-    subprocess.run(["git", "add", filename])
-    commit_message = f"Auto commit {i+1} at {datetime.now()}"
-    subprocess.run(["git", "commit", "-m", commit_message])
+    subprocess.run(["git", "add", filename], check=True)
+    msg = f"Auto commit {i} at {datetime.now()}"
+    subprocess.run(["git", "commit", "-m", msg])
 
-    # Small pause (1–5 seconds)
-    wait = random.randint(1, 5)
-    print(f"Commit {i+1} done, waiting {wait}s...")
-    time.sleep(wait)
-
-# Push all commits together
+print("✅ All commits done for this run — pushing to GitHub…")
 subprocess.run(["git", "push", "origin", "main"])
-print("✅ All commits pushed!")
+print("✅ Push complete!")
 
