@@ -1,0 +1,33 @@
+name: Auto Commit Daily
+
+on:
+  schedule:
+    - cron: '15 0 * * *'   # Runs every day at 00:00 UTC (adjust below)
+  workflow_dispatch:       # Allows manual run from GitHub UI
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run commit script
+        run: |
+          echo "Running auto commit script..."
+          python3 auto_commit.py
+
+      - name: Push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Auto commit via GitHub Actions $(date)" || echo "No changes to commit"
+          git push
+
