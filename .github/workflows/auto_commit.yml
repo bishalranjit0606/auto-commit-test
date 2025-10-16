@@ -17,6 +17,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Ensures the runner fetches the full history to prevent push errors
+          fetch-depth: 0 
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -26,13 +28,14 @@ jobs:
       - name: Run commit script
         run: |
           echo "Running auto commit script..."
+          # The Python script will create the commits with the correct Git identity
           python3 auto_commit.py
 
       - name: Push changes
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Auto commit via GitHub Actions $(date)" || echo "No changes to commit"
-          git push
-
+          # Set identity one last time for the 'git push' command and general safety
+          git config user.name "Bishal Ranjit" 
+          git config user.email "bishalranjit0606@users.noreply.github.com" 
+          
+          # Push the changes. '|| true' or '|| echo' handles the case where there are no changes to push gracefully
+          git push origin main || echo "No new commits to push"
