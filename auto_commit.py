@@ -3,13 +3,20 @@ import random
 import subprocess
 from datetime import datetime
 
+# --- Configuration for Contribution Graph Fix ---
+# Using your no-reply email ensures the commits count toward your contributions 
+# without exposing your primary email.
+GIT_USER_NAME = "Bishal Ranjit"
+GIT_USER_EMAIL = "bishalranjit0606@users.noreply.github.com"
+# -----------------------------------------------
+
 # Work in the current repository
 repo_path = os.getcwd()
 os.chdir(repo_path)
 
 # ✅ Set Git author identity for all commits
-subprocess.run(["git", "config", "user.name", "github-actions[bot]"], check=True)
-subprocess.run(["git", "config", "user.email", "actions@github.com"], check=True)
+subprocess.run(["git", "config", "user.name", GIT_USER_NAME], check=True)
+subprocess.run(["git", "config", "user.email", GIT_USER_EMAIL], check=True)
 
 # Decide 1–5 commits per run
 num_commits = random.randint(1, 5)
@@ -26,7 +33,5 @@ for i in range(1, num_commits + 1):
     msg = f"Auto commit {i} at {datetime.now()}"
     subprocess.run(["git", "commit", "-m", msg])
 
-print("✅ All commits done for this run — pushing to GitHub…")
-subprocess.run(["git", "push", "origin", "main"])
-print("✅ Push complete!")
-
+# Note: The 'git push' command is removed from here and handled by the workflow.
+print("✅ All commits done for this run — changes are ready to push.")
