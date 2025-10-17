@@ -4,9 +4,8 @@ import subprocess
 from datetime import datetime
 
 # --- Configuration for Contribution Graph Fix ---
-# Using your no-reply email ensures the commits count toward your contributions 
-# without exposing your primary email.
-GIT_USER_NAME = "bishalranjit0606"
+# CRITICAL: This no-reply email is linked to your account and ensures the commits count.
+GIT_USER_NAME = "bishalranjit0606"  # Using your username
 GIT_USER_EMAIL = "bishalranjit0606@users.noreply.github.com"
 # -----------------------------------------------
 
@@ -33,5 +32,4 @@ for i in range(1, num_commits + 1):
     msg = f"Auto commit {i} at {datetime.now()}"
     subprocess.run(["git", "commit", "-m", msg])
 
-# Note: The 'git push' command is removed from here and handled by the workflow.
 print("✅ All commits done for this run — changes are ready to push.")
