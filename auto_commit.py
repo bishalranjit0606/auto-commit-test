@@ -6,7 +6,7 @@ from datetime import datetime
 # --- Configuration for Contribution Graph Fix ---
 # Using your no-reply email ensures the commits count toward your contributions 
 # without exposing your primary email.
-GIT_USER_NAME = "Bishal Ranjit"
+GIT_USER_NAME = "bishalranjit0606"
 GIT_USER_EMAIL = "bishalranjit0606@users.noreply.github.com"
 # -----------------------------------------------
 
